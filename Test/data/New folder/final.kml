@@ -1,0 +1,202 @@
+ <kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+       <name>csvToKml.kml</name> <open>1</open>
+       <Style id="red">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+<Style id="Magnifier">
+      <IconStyle>
+        <Icon>
+          <href>https://images.vexels.com/media/users/3/132064/isolated/preview/27a9fb54f687667ecfab8f20afa58bbb-search-businessman-circle-icon-by-vexels.png</href>
+        </Icon>
+      </IconStyle>
+    </Style><Style id="exampleStyleDocument">           <LabelStyle>
+           <color>ff0000cc</color>
+           </LabelStyle>
+         </Style>
+
+       <Style id="transBluePoly">
+      <LineStyle>
+        <width>1.5</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>7dff0000</color>
+      </PolyStyle>
+    </Style> <Folder><name>Wifi Networks</name><Placemark>
+           <name>Ariel_University</name>
+           <description>-72.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.20889466192743 ,32.10375216877229 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-65.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.208765181718555 ,32.10329792892698 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-80.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.20879678286962 ,32.10264067512807 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Partner</name>
+           <description>-75.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.208918344457985 ,32.10237343889603 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-84.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21004399118636 ,32.102511521244296 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>AUC</name>
+           <description>-70.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21002087983995 ,32.10264690630098 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>KCG-ADSL</name>
+           <description>-73.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.20993520048027 ,32.10354886235755 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-80.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21003228698535 ,32.103660254464586 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-76.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21017620635896 ,32.103767173558346 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-93.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21049031795688 ,32.103982371021715 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-78.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21068014390416 ,32.104069053195 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-76.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.2114587858098 ,32.10430899321439 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name></name>
+           <description>-83.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21154678637676 ,32.104443676981845 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-83.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21152292796228 ,32.10482510611714 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-82.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21144840502151 ,32.10491573523399 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-82.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21135914481171 ,32.10497805752186 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-93.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21127107088187 ,32.105012886431425 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-80.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21119936643151 ,32.105029586182305 </coordinates>
+           </Point>
+       </Placemark>
+
+		<Placemark>
+           <name>Ariel_University</name>
+           <description>-88.0</description>
+           <styleUrl>#red</styleUrl>
+           <Point>
+                            <coordinates>35.21108676241175 ,32.10503185234419 </coordinates>
+           </Point>
+       </Placemark>
+
+		</Folder>
+</Document>
+</kml>
