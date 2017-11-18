@@ -39,7 +39,7 @@ public class WiFiLinkedList {
 		}
 	}
 	public String toString(){
-	String basicString= Time+" ,"+UID+" ,"+LAT+" ,"+LON+" ,"+ALT+" ,"+LLWF.size();
+	String basicString= Time+","+UID+","+LAT+","+LON+","+ALT+","+LLWF.size();
 	for (int i = 0; i < LLWF.size() ; i++) {
 	basicString=basicString+LLWF.get(i);
 }
