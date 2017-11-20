@@ -71,13 +71,14 @@ public class ScannerFunctions{
 			WiFiLinkedList wll = new WiFiLinkedList();
 			String Line = BR.readLine();
 			String[] firstLine = Line.split(",");
-			String id = firstLine[2].substring(6);
+			String id = "";
 			while(Line != null){
 				if(count==0){
 					if(!Line.contains("WigleWifi")){
 						System.out.println("Error: File must be from WigleWifi ("+fileName+").");
 						break;
 					}
+					else id = firstLine[2].substring(6);
 				}
 				count++;
 				if(count>2){
@@ -155,13 +156,20 @@ public class ScannerFunctions{
 				lineYear = Integer.parseInt(lineDate.substring(0, 4));
 				lineMonth = Integer.parseInt(lineDate.substring(5, 7));
 				lineDay = Integer.parseInt(lineDate.substring(8, 10));
-
+				if(lineYear>=startYear && lineYear<=endYear && lineMonth>=startMonth && lineMonth<=endMonth && lineDay>startDay) {
+					hmsStart = "00:00:00";
+				}
+				if(lineYear>=startYear && lineYear<=endYear && lineMonth>=startMonth && lineMonth<=endMonth && lineDay<endDay) {
+					hmsEnd = "23:59:59";
+				}
 				// checking if the line's time is corresponding to the given time filter
-				if(lineTime.isAfter(LocalTime.parse(hmsStart)) && lineTime.isBefore(LocalTime.parse(hmsEnd)) && lineYear>=startYear 
-						&& lineYear<=endYear && lineMonth>=startMonth && lineMonth<=endMonth && lineDay>=startDay && lineDay<=endDay)
-				{
-					filteredCSV.add(brLine);
-					brLine = br.readLine();
+				if(lineYear>=startYear && lineYear<=endYear && lineMonth>=startMonth && lineMonth<=endMonth && lineDay>=startDay && lineDay<=endDay) {
+					if(lineTime.isAfter(LocalTime.parse(hmsStart)) && lineTime.isBefore(LocalTime.parse(hmsEnd)))
+					{
+						filteredCSV.add(brLine);
+						brLine = br.readLine();
+					}
+					else brLine = br.readLine();
 				}
 				else brLine = br.readLine();
 			}
@@ -279,8 +287,17 @@ public class ScannerFunctions{
 	 * @param Desc = Placemark description
 	 * @return string
 	 */
-	private static String kmlPlacemarkGenerator(String lon,String lat,String pointName, String Desc){// adds a placemark (with description)
-		String all = "<Placemark>\n           <name>"+pointName+"</name>\n           <description>"+ Desc+"</description>\n "
+	private static String kmlPlacemarkGenerator(String lon,String lat,String pointName, String desc){// adds a placemark (with description)
+		if(pointName.indexOf('&')>=0)
+		{
+			pointName = pointName.replaceAll("&", "&amp;");
+		}
+		if(desc.indexOf('&')>=0)
+		{
+			desc = desc.replaceAll("&", "&amp;");
+		}
+
+		String all = "<Placemark>\n           <name>"+pointName+"</name>\n           <description>"+ desc+"</description>\n "
 				+ "          <styleUrl>#red</styleUrl>\n           <Point>\n                   "
 				+ "         <coordinates>";
 		all+= lon+","+lat+"</coordinates>\n           </Point>\n       </Placemark>\n\n		";
@@ -293,17 +310,17 @@ public class ScannerFunctions{
 	private static String addFilteringArea(double[] rectTop, double[] rectBot, String kml){//adds the rectangle of the filtering area
 		//rectTop = {xTopLeft, yTopLeft, xTopRight, yTopRight}
 		//rectBot = {xBottomLeft, yBottomLeft, xBottomRight, yBottomRight}
-
+//<altitudeMode>relativeToGround</altitudeMode>
 		kml+="<Placemark>\n      <name>Filtered Area</name>\n      <styleUrl>#msn_ylw-pushpin</styleUrl>\n "
 				+ "     <Polygon>\n        <extrude>1</extrude>\n          		<tessellate>1</tessellate>\n"
-				+ "				<altitudeMode>relativeToGround</altitudeMode>\n 				<outerBoundaryIs>\n"
+				+ "				\n 				<outerBoundaryIs>\n"
 				+ "					<LinearRing>\n           "
 				+ " <coordinates>\n              " 
-				+rectTop[0]+","+rectTop[1]+",10\n              "
-				+rectTop[2]+","+rectTop[3]+",10\n              "
-				+rectBot[2]+","+rectBot[3]+",10\n              "
-				+rectBot[0]+","+rectBot[1]+",10\n              "
-				+rectTop[0]+","+rectTop[1]+",10\n              "
+				+rectTop[0]+","+rectTop[1]+",50\n              "
+				+rectTop[2]+","+rectTop[3]+",50\n              "
+				+rectBot[2]+","+rectBot[3]+",50\n              "
+				+rectBot[0]+","+rectBot[1]+",50\n              "
+				+rectTop[0]+","+rectTop[1]+",50\n              "
 				+"</coordinates>\n       "
 				+ "   </LinearRing>\n        </outerBoundaryIs>\n      </Polygon>\n    </Placemark>";
 		return kml;
@@ -366,14 +383,14 @@ public class ScannerFunctions{
 
 		builder.append(kmlHeader);
 
-		String polygonHeader = "<name>Untitled Polygon.kml</name>\n" + "	<Style id=\"sh_ylw-pushpin\">\n" + "		<IconStyle>\n" + "			<scale>1.3</scale>\n" + "			<Icon>\n" + 
+		String polygonHeader = "<name>Untitled Polygon.kml</name>\n" + "	<Style id=\"sh_ylw-pushpin\">\n" + "		<IconStyle>\n" + "			<scale>1.1</scale>\n" + "			<Icon>\n" + 
 				"				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>\n" + "			</Icon>\n" + "			<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>\n"
 				+ "		</IconStyle>\n" + "		<LineStyle>\n" + 
-				"			<color>ff000000</color>\n" + "			<width>3</width>\n" + "		</LineStyle>\n" + "		<PolyStyle>\n" + "			<color>ccffff55</color>\n" + 
-				"		</PolyStyle>\n" + "	</Style>\n" + "	<Style id=\"sn_ylw-pushpin\">\n" + "		<IconStyle>\n" + "			<scale>1.1</scale>\n" + "			<Icon>\n" + 
+				"			<color>ff000000</color>\n" + "			<width>3</width>\n" + "		</LineStyle>\n" + "		<PolyStyle>\n" + "			<color>66ffff55</color>\n" + 
+				"		</PolyStyle>\n" + "	</Style>\n" + "	<Style id=\"sn_ylw-pushpin\">\n" + "		<IconStyle>\n" + "			<scale>1.3</scale>\n" + "			<Icon>\n" + 
 				"				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>\n" + "			</Icon>\n" + "			<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>\n"
 				+ "		</IconStyle>\n" + "		<LineStyle>\n" + 
-				"			<color>ff000000</color>\n" + "			<width>3</width>\n" + "		</LineStyle>\n" + "		<PolyStyle>\n" + "			<color>ccffff55</color>\n" + "		</PolyStyle>\n" + 
+				"			<color>ff000000</color>\n" + "			<width>3</width>\n" + "		</LineStyle>\n" + "		<PolyStyle>\n" + "			<color>66ffff55</color>\n" + "		</PolyStyle>\n" + 
 				"	</Style>\n" + "	<StyleMap id=\"msn_ylw-pushpin\">\n" + "		<Pair>\n" + "			<key>normal</key>\n" + "			<styleUrl>#sn_ylw-pushpin</styleUrl>\n" + 
 				"		</Pair>\n" + 				"		<Pair>\n" + "			<key>highlight</key>\n" + "			<styleUrl>#sh_ylw-pushpin</styleUrl>\n" +"		</Pair>\n" + 	"	</StyleMap>";
 
@@ -539,10 +556,12 @@ public class ScannerFunctions{
 		while(!exit) {
 			System.out.println("Select a folder to scan for csv files: ");
 			Scanner folderScanner = new Scanner(System.in);
-			System.out.println("Enter path to write the CSV file: ");
+			String folder = folderScanner.nextLine();
+			System.out.println("Enter path to write the CSV file (with the file's name): ");
 			Scanner csvScanner = new Scanner(System.in);
+			String csvWriteFolder = csvScanner.nextLine();
 
-			getAllcsvFilesFromFolderAndAddtoOneCSVTable(folderScanner.nextLine(), csvScanner.nextLine());
+			getAllcsvFilesFromFolderAndAddtoOneCSVTable(folder, csvWriteFolder);
 
 			System.out.println("Create a KML file Sorted by (1)Time, (2)GPS, (3)ID: ");
 			Scanner sort = new Scanner(System.in);
@@ -553,15 +572,16 @@ public class ScannerFunctions{
 			case 1: { // filter by time
 				System.out.println("Filter by time syntax:\nStart time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)"
 						+ " \nEnd time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)");
-				System.out.println("Enter path to write the KML file: ");
+				System.out.println("Enter path to write the KML file (with the file's name): ");
 				Scanner kmlPathScan = new Scanner(System.in);
+				String kmlPath = kmlPathScan.nextLine();
 				System.out.println("Start time: ");
 				Scanner startTimeScan = new Scanner(System.in);
 				String startTime = startTimeScan.nextLine();
 				System.out.println("End time: ");
 				Scanner endTimeScan = new Scanner(System.in);
 				String endTime = endTimeScan.nextLine();
-				filtercsvFileByTime(csvScanner.nextLine(), kmlPathScan.nextLine(),  startTime, endTime);
+				filtercsvFileByTime(csvWriteFolder, kmlPath,  startTime, endTime);
 				System.out.println("Success!");
 				kmlPathScan.close();
 				startTimeScan.close();
@@ -569,24 +589,24 @@ public class ScannerFunctions{
 				break;
 			}
 			case 2: { // filter by GPS
-				System.out.println("Filter by GPS syntax:\nStart lon: 35.xxxxxx, Start lat: 32.xxxxxx\nEnd lon: 35.xxxxxx, End lat: 32.xxxxxx");
-				System.out.println("Enter path to write the KML file: ");
+				System.out.println("Filter by GPS syntax:\nStart lat (bottom right corner of the filtering rectangle): 32.xxxxxx\nStart lon (bottom right corner of the filtering rectangle): 35.xxxxxx"
+						+ "\nEnd lat (top left corner of the filtering rectangle): 32.xxxxxx \nEnd lon (top left corner of the filtering rectangle): 35.xxxxxx");
+				System.out.println("\nEnter path to write the KML file (with the file's name): ");
 				Scanner kmlPathScan = new Scanner(System.in);
+				String kmlPath = kmlPathScan.nextLine();
 				System.out.println("Start lat: ");
 				Scanner startLatScan = new Scanner(System.in);
 				double startLat = startLatScan.nextDouble();
-				//String startTime = startTimeScan.nextLine();
+				System.out.println("Start lon: ");
+				Scanner startLonScan = new Scanner(System.in);
+				double startLon = startLonScan.nextDouble();
 				System.out.println("End lat: ");
 				Scanner endLatScan = new Scanner(System.in);
 				double endLat = endLatScan.nextDouble();
-				System.out.println("Start lat: ");
-				Scanner startLonScan = new Scanner(System.in);
-				double startLon = startLonScan.nextDouble();
-				//String startTime = startTimeScan.nextLine();
-				System.out.println("End lat: ");
+				System.out.println("End lon: ");
 				Scanner endLonScan = new Scanner(System.in);
 				double endLon = endLonScan.nextDouble();
-				filtercsvFileByGPS(csvScanner.nextLine(), kmlPathScan.nextLine(), startLon, startLat,
+				filtercsvFileByGPS(csvWriteFolder, kmlPath, startLon, startLat,
 						endLon, endLat);
 
 				kmlPathScan.close();
@@ -599,11 +619,12 @@ public class ScannerFunctions{
 				break;
 			}
 			case 3: { // filter by ID
-				System.out.println("Enter path to write the KML file: ");
+				System.out.println("Enter path to write the KML file (with the file's name): ");
 				Scanner kmlPathScan = new Scanner(System.in);
+				String kmlPath = kmlPathScan.nextLine();
 				System.out.println("Device ID: ");
 				Scanner id = new Scanner(System.in);
-				filtercsvFileByID(csvScanner.nextLine(), kmlPathScan.nextLine(), id.nextLine());
+				filtercsvFileByID(csvWriteFolder, kmlPath, id.nextLine());
 				kmlPathScan.close();
 				id.close();
 				System.out.println("Success!");
@@ -615,22 +636,36 @@ public class ScannerFunctions{
 			folderScanner.close();
 			System.out.println("Input 'c' to continue or 'x' to exit...");
 			Scanner input = new Scanner(System.in);
-			if(input.nextLine()=="x") exit = true;
-			if(input.nextLine()=="c") exit = false;
+			while(!input.hasNextLine()){
+				if(input.hasNextLine()){
+					if(input.nextLine()=="x"){
+						exit = true;
+						break;
+					}
+					if(input.nextLine()=="c"){
+						exit = false;
+						break;
+					}
+				}
+			}
 		}
-
 		System.out.println("done!");
 	}
 
 	// ***** TESTER *****
 	public static void runTest(){
-		String folder = "C:\\Users\\Dan\\Desktop\\data\\27.10";
+		String folder = "C:\\Users\\Dan\\Desktop\\New folder\\27.10";
 		//String folder = "C:\\Users\\USER\\Desktop\\data\\New folder";
 		String csvWritePath = "C:\\Users\\Dan\\Desktop\\Test\\merged csv file.csv";
-		//		String kmlFolder="C:\\Users\\USER\\Desktop\\New folder\\BookTime.kml";
-		//			    2017:11:12:13:06:42
-		//			 	2017:11:12:13:09:42
-
+		/*		String kmlFolder="C:\\Users\\USER\\Desktop\\New folder\\BookTime.kml";
+				    2017:11:12:13:06:42
+				 	2017:11:12:13:09:42
+		start
+		<coordinates>34.97470633453521,32.06320051865906,0</coordinates>
+		
+		end
+		<coordinates>34.87623703518137,32.11926397274331,0</coordinates>
+		*/
 		getAllcsvFilesFromFolderAndAddtoOneCSVTable(folder, csvWritePath);
 
 		System.out.println("Create a KML file Sorted by (1)Time, (2)GPS, (3)ID: ");
@@ -643,9 +678,9 @@ public class ScannerFunctions{
 			System.out.println("Filter by time syntax:\nStart time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)"
 					+ " \nEnd time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)");
 			System.out.println("Enter path to write the KML file: ");
-			String kmlPath = "C:\\Users\\Dan\\Desktop\\Test\\BookTime_TEST.kml";
-			String startTime = "2017:11:12:13:06:42";
-			String endTime = "2017:11:12:13:09:42";
+			String kmlPath = "C:\\Users\\Dan\\Desktop\\Test\\BookTime_TEST2.kml";
+			String startTime = "2017:11:19:23:03:57";
+			String endTime = "2017:11:20:00:55:57";
 			filtercsvFileByTime(csvWritePath, kmlPath,  startTime, endTime);
 			System.out.println("Success!");
 			break;
@@ -667,7 +702,7 @@ public class ScannerFunctions{
 		case 3: {
 			System.out.println("Enter path to write the KML file: ");
 			String kmlPath = "C:\\Users\\Dan\\Desktop\\Test\\BookID_TEST.kml";
-			String ID = "SHIELD Tablet";
+			String ID = "SM-G935F";
 			filtercsvFileByID(csvWritePath, kmlPath, ID);
 			break;
 		}
@@ -684,6 +719,8 @@ public class ScannerFunctions{
 		String kmlFolder="C:\\Users\\Dan\\Desktop\\New folder\\BookTime.kml";
 		2017:11:12:13:06:42
 		2017:11:12:13:09:42 
+		2017:11:19:23:03:57
+		2017:11:20:01:11:15
 		Start lon: 
 			35.20889839056406
 		End lon: 
@@ -693,8 +730,8 @@ public class ScannerFunctions{
 		End lat: 
 			32.105012886431425
 		 */
-		//	run();
-		runTest();
+		run();
+		//runTest();
 
 	}
 }
