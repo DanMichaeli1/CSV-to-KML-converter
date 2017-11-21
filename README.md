@@ -1,5 +1,5 @@
 # CSV to KML converter
-test
+
 This program collects all the csv files from WigleWifi in a specified folder and creates a kml file after filtering the data.
 
 ## Contributors
