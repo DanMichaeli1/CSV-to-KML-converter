@@ -22,9 +22,10 @@ public class WiFiLinkedList {
 	    this.SSID=SSID;
 	}
 	public WiFiLinkedList() {
-		// TODO Auto-generated constructor stub
-	}
+		LLWF = new LinkedList<WiFi>();
+		}
 	public WiFiLinkedList(double lat, double lon, double alt, String time, String id) {
+		LLWF = new LinkedList<WiFi>();
 		this.LAT = lat;
 		this.LON = lon;
 		this.ALT = alt;

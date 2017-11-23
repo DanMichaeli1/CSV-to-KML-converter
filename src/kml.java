@@ -29,11 +29,11 @@ public class kml {
 			TimeStamp ts = new TimeStamp();
 			ts.setWhen(time);
 			doc.createAndAddPlacemark().withName(toDisplay.get(i)[8]).withOpen(Boolean.TRUE).withTimePrimitive(ts)
-			.withDescription("mac: " + toDisplay.get(i)[7] + " freq: " + toDisplay.get(i)[9] + " signal: " + toDisplay.get(i)[10])
-			.createAndSetPoint().addToCoordinates(toDisplay.get(i)[3] +" "+toDisplay.get(i)[2] +" "+toDisplay.get(i)[4]);
+			.withDescription("mac: "+toDisplay.get(i)[7]+" freq: "+toDisplay.get(i)[9]+" signal: "+toDisplay.get(i)[6])
+			.createAndSetPoint().addToCoordinates(toDisplay.get(i)[3]+", "+toDisplay.get(i)[2]);
 		}
 		try {
-			kml.marshal(new File("src\\placemarks.kml"));
+			kml.marshal(new File(path));
 		} catch (IOException ex) {
 			System.out.print("Error reading file\n" + ex);
 			System.exit(2);
@@ -43,7 +43,7 @@ public class kml {
 	//ONEPLUS A3003
 	private static String convertTimeFormat(String oldTimeFormat) { /// סעיף מספר 7
 		String[] dateTime = oldTimeFormat.split(" ");
-		System.out.println(dateTime[0] + 'T' + dateTime[1]);
+		//System.out.println(dateTime[0] + 'T' + dateTime[1]);
 		return dateTime[0] + 'T' + dateTime[1];
 
 
