@@ -8,15 +8,18 @@ public class WiFiLinkedList {
 	private double LAT,LON,ALT;
 	private String Time;
 	private String UID;
-	public WiFiLinkedList(){
-	}
-	public WiFiLinkedList(double LAT, double LON, double ALT, String Time, String UID){
+	private String SSID;
+	private double freq, signal;
+
+	
+	public WiFiLinkedList(double LAT, double LON, double ALT, String Time, String UID, String SSID, double freq, double signal){
 		LLWF = new LinkedList<WiFi>();
-		this.LAT=LAT;		//χε ΰπλι
-		this.LON= LON;		//χε ΰετχι
-		this.ALT= ALT;		//βεαδ
-		this.Time=Time;		//ζξο
-		this.UID = UID;	//ξζδδ
+		this.LAT=LAT;		//Χ§Χ• ΧΧ Χ›Χ™
+		this.LON= LON;		//Χ§Χ• ΧΧ•Χ¤Χ§Χ™
+		this.ALT= ALT;		//Χ’Χ•Χ‘Χ”
+		this.Time=Time;		//Χ–ΧΧ
+		this.UID = UID;	//ΧΧ–Χ”Χ”
+	    this.SSID=SSID;
 	}
 	public void add(WiFi wf){
 		LLWF.add(wf);
@@ -44,5 +47,36 @@ public class WiFiLinkedList {
 	basicString=basicString+LLWF.get(i);
 }
 	return basicString;
+	}
+	public String getTime() {
+		return Time;
+	}
+	public String getSSID() {
+		// TODO Auto-generated method stub
+		return UID;
+	}
+	public double getLon() {
+		// TODO Auto-generated method stub
+		return LON;
+	}
+	public String getFreq() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getMac() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getSignal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public double getAlt() {
+		// TODO Auto-generated method stub
+		return ALT;
+	}
+	public double getLat() {
+		// TODO Auto-generated method stub
+		return LAT;
 	}
 }
