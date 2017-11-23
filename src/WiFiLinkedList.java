@@ -14,12 +14,22 @@ public class WiFiLinkedList {
 	
 	public WiFiLinkedList(double LAT, double LON, double ALT, String Time, String UID, String SSID, double freq, double signal){
 		LLWF = new LinkedList<WiFi>();
-		this.LAT=LAT;		//קו אנכי
-		this.LON= LON;		//קו אופקי
-		this.ALT= ALT;		//גובה
-		this.Time=Time;		//זמן
-		this.UID = UID;	//מזהה
+		this.LAT=LAT;
+		this.LON= LON;		
+		this.ALT= ALT;		
+		this.Time=Time;		
+		this.UID = UID;	
 	    this.SSID=SSID;
+	}
+	public WiFiLinkedList() {
+		// TODO Auto-generated constructor stub
+	}
+	public WiFiLinkedList(double lat, double lon, double alt, String time, String id) {
+		this.LAT = lat;
+		this.LON = lon;
+		this.ALT = alt;
+		this.Time = time;
+		this.UID = id;
 	}
 	public void add(WiFi wf){
 		LLWF.add(wf);

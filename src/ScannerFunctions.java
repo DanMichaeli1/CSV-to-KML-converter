@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-
 /**
  * 
  * @author Dan Michaeli, Dor Levi, Yarden Mizrahi
@@ -181,8 +180,8 @@ public class ScannerFunctions{
 			{
 				filtered.add(filteredCSV.get(i).split(","));
 			}
-
-			printToKML(filtered, pathToWriteKML); // creating the kml file
+			kml.makeKmlFile(filtered, pathToWriteKML);
+			//printToKML(filtered, pathToWriteKML); // creating the kml file
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -730,8 +729,8 @@ public class ScannerFunctions{
 		End lat: 
 			32.105012886431425
 		 */
-		run();
-		//runTest();
+		//run();
+		runTest();
 
 	}
 }
