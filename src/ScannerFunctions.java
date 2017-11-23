@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-
 /**
  * 
  * @author Dan Michaeli, Dor Levi, Yarden Mizrahi
@@ -181,8 +180,8 @@ public class ScannerFunctions{
 			{
 				filtered.add(filteredCSV.get(i).split(","));
 			}
-
-			printToKML(filtered, pathToWriteKML); // creating the kml file
+			kml.makeKmlFile(filtered, pathToWriteKML);
+			//printToKML(filtered, pathToWriteKML); // creating the kml file
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -678,7 +677,7 @@ public class ScannerFunctions{
 			System.out.println("Filter by time syntax:\nStart time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)"
 					+ " \nEnd time: year(xxxx):month(xx):day(xx):hr(xx):min(xx):sec(xx)");
 			System.out.println("Enter path to write the KML file: ");
-			String kmlPath = "C:\\Users\\Dan\\Desktop\\Test\\BookTime_TEST2.kml";
+			String kmlPath = "C:\\Users\\Dan\\Desktop\\Test\\htrfhgfhgkjhhjg.kml";
 			String startTime = "2017:11:19:23:03:57";
 			String endTime = "2017:11:20:00:55:57";
 			filtercsvFileByTime(csvWritePath, kmlPath,  startTime, endTime);
@@ -730,8 +729,8 @@ public class ScannerFunctions{
 		End lat: 
 			32.105012886431425
 		 */
-		run();
-		//runTest();
+		//run();
+		runTest();
 
 	}
 }
