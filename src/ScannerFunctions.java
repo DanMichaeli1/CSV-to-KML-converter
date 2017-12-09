@@ -633,20 +633,20 @@ public class ScannerFunctions{
 			sort.close();
 			csvScanner.close();
 			folderScanner.close();
-			System.out.println("Input 'c' to continue or 'x' to exit...");
-			Scanner input = new Scanner(System.in);
-			while(!input.hasNextLine()){
-				if(input.hasNextLine()){
-					if(input.nextLine()=="x"){
-						exit = true;
-						break;
-					}
-					if(input.nextLine()=="c"){
-						exit = false;
-						break;
-					}
-				}
-			}
+//			System.out.println("Input 'c' to continue or 'x' to exit...");
+//			Scanner input = new Scanner(System.in);
+//			while(!input.hasNextLine()){
+//				if(input.hasNextLine()){
+//					if(input.nextLine()=="x"){
+//						exit = true;
+//						break;
+//					}
+//					if(input.nextLine()=="c"){
+//						exit = false;
+//						break;
+//					}
+//				}
+//			}
 		}
 		System.out.println("done!");
 	}
@@ -729,8 +729,8 @@ public class ScannerFunctions{
 		End lat: 
 			32.105012886431425
 		 */
-		//run();
-		runTest();
+		run();
+		//runTest();
 
-	}
+	}//27-10-2017  4:13:53
 }

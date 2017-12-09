@@ -25,12 +25,15 @@ public class kml {
 		Document doc = kml.createAndSetDocument();
 		String time;
 		for (int i = 0; i < toDisplay.size(); i++) {
+			String desc = "Wifi SSID: "+toDisplay.get(i)[8]+"\nMac: "+toDisplay.get(i)[7]+"\nSignal strength: "+toDisplay.get(i)[6]
+					+"\nTime: "+toDisplay.get(i)[0]+"\nChannel: "+toDisplay.get(i)[9]
+							+"\nNumber of additional wifi connections: "+toDisplay.get(i)[5]
+									+"\nCapturing device: "+toDisplay.get(i)[1];
 			time = convertTimeFormat(toDisplay.get(i)[0]);
 			TimeStamp ts = new TimeStamp();
 			ts.setWhen(time);
 			doc.createAndAddPlacemark().withName(toDisplay.get(i)[8]).withOpen(Boolean.TRUE).withTimePrimitive(ts)
-			.withDescription("mac: "+toDisplay.get(i)[7]+" freq: "+toDisplay.get(i)[9]+" signal: "+toDisplay.get(i)[6])
-			.createAndSetPoint().addToCoordinates(toDisplay.get(i)[3]+", "+toDisplay.get(i)[2]);
+			.withDescription(desc).createAndSetPoint().addToCoordinates(toDisplay.get(i)[3]+", "+toDisplay.get(i)[2]);
 		}
 		try {
 			kml.marshal(new File(path));
